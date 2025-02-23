@@ -5,6 +5,113 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
+    #include <stdio.h>
+
+int main() {
+    int tabuleiro[5][5] = {0}; // Inicializa o tabuleiro com 0
+
+    // Posiciona um navio verticalmente
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[i][2] = 1;
+    }
+
+    // Posiciona um navio horizontalmente
+    for (int i = 0; i < 4; i++) {
+        tabuleiro[3][i] = 1;
+    }
+
+    // Exibe o tabuleiro
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+    #include <stdio.h>
+
+int main() {
+    int tabuleiro[10][10] = {0}; // Inicializa o tabuleiro com 0
+
+    // Posiciona navios verticalmente e horizontalmente
+    for (int i = 0; i < 4; i++) {
+        tabuleiro[i][1] = 3; // Navio vertical
+        tabuleiro[6][i] = 3; // Navio horizontal
+    }
+
+    // Posiciona navios na diagonal
+    for (int i = 0; i < 4; i++) {
+        tabuleiro[i][i] = 3;
+        tabuleiro[i][9-i] = 3;
+    }
+
+    // Exibe o tabuleiro
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+    #include <stdio.h>
+
+void preencherCone(int tabuleiro[10][10], int x, int y) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = -i; j <= i; j++) {
+            if (x + i < 10 && y + j >= 0 && y + j < 10) {
+                tabuleiro[x + i][y + j] = 1;
+            }
+        }
+    }
+}
+
+void preencherCruz(int tabuleiro[10][10], int x, int y) {
+    for (int i = 0; i < 5; i++) {
+        if (x + i < 10) tabuleiro[x + i][y] = 1;
+        if (x - i >= 0) tabuleiro[x - i][y] = 1;
+        if (y + i < 10) tabuleiro[x][y + i] = 1;
+        if (y - i >= 0) tabuleiro[x][y - i] = 1;
+    }
+}
+
+void preencherOctaedro(int tabuleiro[10][10], int x, int y) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = -i; j <= i; j++) {
+            if (x + i < 10 && y + j >= 0 && y + j < 10) {
+                tabuleiro[x + i][y + j] = 1;
+            }
+            if (x - i >= 0 && y + j >= 0 && y + j < 10) {
+                tabuleiro[x - i][y + j] = 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int tabuleiro[10][10] = {0}; // Inicializa o tabuleiro com 0
+
+    // Posiciona habilidades especiais
+    preencherCone(tabuleiro, 0, 2);
+    preencherCruz(tabuleiro, 5, 5);
+    preencherOctaedro(tabuleiro, 8, 8);
+
+    // Exibe o tabuleiro
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
